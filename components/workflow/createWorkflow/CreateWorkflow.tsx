@@ -164,6 +164,7 @@ export default function CreateWorkflow() {
         id: `${action1Id + action2Id}`, // You can generate a unique ID
         startIconId: action1Id,
         endIconId: action2Id,
+        
       };
 
       setConnections((prevConnections) => [...prevConnections, newConnection]);
