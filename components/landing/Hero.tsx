@@ -20,7 +20,9 @@ function Hero() {
                                 transition duration-500 hover:scale-110 cursor-pointer"
           >
             Launch App
-            <BsArrowRightCircle size={24} className="ml-4 mt-1" />
+            <Image width={30} height={30}
+         
+             className="ml-4 rotate-[23deg] animate-waving-hand " src={"/finger.png"} alt={"launch app"} />
           </button>
         </Link>
       </div>
