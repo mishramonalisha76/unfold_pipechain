@@ -108,8 +108,8 @@ const InstalledApps = () => {
                 <Image
                   src={installedApp?.meta?.src}
                   alt="logo"
-                  width={30}
-                  height={30}
+                  width={35}
+                  height={35}
                   className=" rounded-full"
                   objectFit="contain"
                 />
