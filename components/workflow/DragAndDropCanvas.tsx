@@ -71,8 +71,7 @@ const DragAndDropCanvas: React.FC<DragAndDropCanvasProps> = ({
     useState<selectedAction | null>(null);
   const contextMenuRef = useRef(null);
 
-  console.log("ERROR MESSAGE", errorMessage);
-  console.log("APP", workflowActions);
+
 
   useClickAway(contextMenuRef, () => {
     setContextMenuAction(null);
@@ -126,13 +125,11 @@ const DragAndDropCanvas: React.FC<DragAndDropCanvasProps> = ({
     // }
 
     // Remove the last connection from the connections state
-    console.log(i);
-    console.log("CONNETIONS", connections);
+ 
     let updatedConnections = [...connections];
     if (updatedConnections.length === 1 && i == 0) updatedConnections = [];
     else if (updatedConnections.length > 1) updatedConnections.splice(i, 1);
 
-    console.log("uPDATED CONNETIONS", updatedConnections);
     setConnections(updatedConnections);
     setLastClickedActionId(null);
     // Clear the error message (if any)
@@ -152,7 +149,6 @@ const DragAndDropCanvas: React.FC<DragAndDropCanvasProps> = ({
       }
     } else return "border-0";
   };
-  console.log(getActionStatusBorder(workflowActions[1]));
   return (
     <div className="relative bg-white h-screen flex-1">
       <Xwrapper>
@@ -188,7 +184,6 @@ const DragAndDropCanvas: React.FC<DragAndDropCanvasProps> = ({
                 lastClickedActionId === action.actionId ? "selected-icon" : ""
               }`}
               onClick={() => {
-                console.log("in parent click");
                 onActionClick(action);
               }}
               onContextMenu={(e) => handleContextMenu(e, action)}

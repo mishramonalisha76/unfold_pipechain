@@ -48,7 +48,7 @@ const ActionsForm: React.FC<ActionsFormProps> = ({
         </span>
 
         <div className="flex gap-4 flex-col">
-          <div
+        {!!actions[0].installedApp.length &&  <div
             className=" relative p-4 border-[1px] border-white rounded-md text-center whitespace-nowrap w-[19rem] text-white font-semibold  text-lg tracking-wide cursor-pointer"
             onClick={() => setShowDropdown(!showDropdown)}
           >
@@ -62,7 +62,7 @@ const ActionsForm: React.FC<ActionsFormProps> = ({
                 <Dropdown values={values} />
               </div>
             )}
-          </div>
+          </div>}
           {actions.map((action, i) => (
             <div
               key={i}

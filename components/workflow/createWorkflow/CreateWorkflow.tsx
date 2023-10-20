@@ -74,7 +74,6 @@ export default function CreateWorkflow() {
   // }, [wallet.connected])
 
   useEffect(() => {
-    console.log("use effetc", selectedUserWorkflow);
     if (Object.keys(selectedUserWorkflow || {}).length) {
       const selectedConnections: Connection[] =
         selectedUserWorkflow?.connections?.map((link: any) => {
@@ -83,7 +82,6 @@ export default function CreateWorkflow() {
             endIconId: link.endActionId,
           };
         });
-      console.log("Selected Conn", selectedConnections);
       const actionObject: any = {};
       const workflowActionData: selectedAction[] =
         selectedUserWorkflow?.action.map((s: any) => {
@@ -112,8 +110,6 @@ export default function CreateWorkflow() {
         }
       );
 
-      console.log("SELECTED_WORKFLOW", workflowJobsData);
-      console.log("Workflow ACtion", workflowActionData);
       setWorkflowName(selectedUserWorkflow?.name);
       setSelectedUserWorkflowJobs(workflowJobsData);
       setConnections(selectedConnections);
@@ -136,10 +132,7 @@ export default function CreateWorkflow() {
       setConnections(selectedUserWorkflowJob?.connections);
   }, [selectedUserWorkflowJob]);
 
-  console.log("JOBS", selectedUserWorkflowJobs);
-  console.log(connections);
-  console.log("WORKFLOW_ACTIONS", workflowActions);
-  console.log("SELECTED_USER_WORKFLOW", selectedUserWorkflow);
+
   const checkExistingConnection = (action1Id: string, action2Id: string) => {
     const newConnection: any = {
       startIconId: action1Id,
@@ -204,11 +197,13 @@ export default function CreateWorkflow() {
     }
   };
   const handleActionClick = (action: Action, installedAppId: string | null) => {
+    console.log(action)
     setSelectedAction({ ...action, installedAppId: installedAppId });
     setIsActionFormOpen(false);
     setIsFormOpen(true);
   };
   const handleApplicationClick = (application: Application) => {
+    console.log(application)
     setSelectedApplication(application);
     const getFunctionOfApplication = async () => {
       setActionsLoader(true);
@@ -219,7 +214,6 @@ export default function CreateWorkflow() {
           variables
         );
         setActions(response.findAllAction);
-        console.log("RESPONSE FROM GRAPHQL-REQUEST API CALL", response);
         // Update state with the response data as needed
         // For example, setApplications(response.appFindAll)
       } catch (err) {
@@ -239,11 +233,7 @@ export default function CreateWorkflow() {
 
   const handleFormSubmit = (formData: any) => {
     // Handle form submission data here
-    console.log("76", {
-      ...selectedAction,
-      actionId: new ObjectId(),
-      formData,
-    });
+   
     if (selectedAction && workflowActions)
       setWorkflowActions([
         ...workflowActions,
@@ -285,12 +275,9 @@ export default function CreateWorkflow() {
 
     (async function createWorkflow() {
       try {
-        console.log("WORKFLOW_OBJECT", workflowObject);
         const variables = { createWorkflowInput: workflowObject };
         const response = await client.request(CreateWorkflowQuery, variables);
-        console.log("RESPONSE", response);
         //setApplications(response.appFindAll);
-        console.log("RESPONSE FROM GRAPHQL-REQUEST API CALL", response);
         setToastData({
           message: "Workflow created successfully",
           type: "success",
@@ -313,6 +300,8 @@ export default function CreateWorkflow() {
     })();
   };
 
+console.log(selectedAction)
+console.log(selectedApplication)
   return (
     <>
       <div className="flex ">
@@ -378,14 +367,14 @@ export default function CreateWorkflow() {
             {edit && <JobSection />}
           </div>
 
-          {isFormOpen && (
+          {isFormOpen &&  selectedAction &&(
             <TriggerForm
               isOpen={isFormOpen}
               onClose={handleCloseForm}
               onSubmit={handleFormSubmit}
             />
           )}
-          {isActionFormOpen && !actionsLoader && (
+          {isActionFormOpen && !actionsLoader  && (
             <ActionsForm
               actions={actions}
               onActionClick={handleActionClick}
