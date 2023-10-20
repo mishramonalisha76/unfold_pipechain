@@ -27,6 +27,7 @@ export default function CreateWorkflow() {
   const [isFormOpen, setIsFormOpen] = useState(false);
   const [actionsLoader, setActionsLoader] = useState(false);
   const [isActionFormOpen, setIsActionFormOpen] = useState(false);
+  const [childOrder, setChildOrder] = useState(new Map<string,number>());
   const [workflowName, setWorkflowName] = useState("");
   const [edit, setEdit] = useState(false);
 
@@ -171,16 +172,24 @@ export default function CreateWorkflow() {
         id: `${action1Id + action2Id}`, // You can generate a unique ID
         startIconId: action1Id,
         endIconId: action2Id,
+        order:(childOrder.get(action2Id) || 0 )
 
       };
 
+      const newChildOrder = childOrder;
+       childOrder.set(action2Id,(newChildOrder.get(action2Id) || 0)+1);
+       setChildOrder(newChildOrder);
+       
       setConnections((prevConnections) => [...prevConnections, newConnection]);
+      
       setLastClickedActionId(null);
     } else {
       alert("Cannot make the connection!!");
     }
   };
 
+  console.log('order',connections)
+  console.log(childOrder)
   const dragActionClick = (action: Action) => {
     const actionId = action.actionId!;
     //iconIdCounter++;
