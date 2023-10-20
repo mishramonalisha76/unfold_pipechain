@@ -4,56 +4,70 @@ import { WorkflowDataContext } from "@/context";
 import { WorkflowDataProvider } from "@/providers";
 import { ChakraProvider } from "@chakra-ui/react";
 import Navbar from "@/components/navbar/Navbar";
-import {
-  ConnectionProvider,
-  WalletProvider,
-} from "@solana/wallet-adapter-react";
-import { WalletAdapterNetwork } from "@solana/wallet-adapter-base";
-import { UnsafeBurnerWalletAdapter } from "@solana/wallet-adapter-wallets";
-import {
-  WalletModalProvider,
+import { OktoConnector,} from "@okto_wallet/okto-connect-sdk";
+import { WagmiConfig, createConfig, mainnet } from 'wagmi'
+import { createPublicClient, http } from 'viem'
 
-} from "@solana/wallet-adapter-react-ui";
-import { clusterApiUrl } from "@solana/web3.js";
+
+
 import { useRouter } from "next/router";
 import { useMemo } from "react";
+import {WalletProvider} from '@suiet/wallet-kit';
+import '@suiet/wallet-kit/style.css';
 
-import "@solana/wallet-adapter-react-ui/styles.css";
+
 
 export default function App({ Component, pageProps }: AppProps) {
   const router = useRouter();
   console.log(router);
-  const network = WalletAdapterNetwork.Devnet;
+  
+  // const network = WalletAdapterNetwork.Devnet;
 
-  // You can also provide a custom RPC endpoint.
-  const endpoint = useMemo(() => clusterApiUrl(network), [network]);
+  // // You can also provide a custom RPC endpoint.
+  // const endpoint = useMemo(() => clusterApiUrl(network), [network]);
 
-  const wallets = useMemo(
-    () => [
-      /**
-       * Wallets that implement either of these standards will be available automatically.
-       *
-       *   - Solana Mobile Stack Mobile Wallet Adapter Protocol
-       *     (https://github.com/solana-mobile/mobile-wallet-adapter)
-       *   - Solana Wallet Standard
-       *     (https://github.com/solana-labs/wallet-standard)
-       *
-       * If you wish to support a wallet that supports neither of those standards,
-       * instantiate its legacy wallet adapter here. Common legacy adapters can be found
-       * in the npm package `@solana/wallet-adapter-wallets`.
-       */
-      new UnsafeBurnerWalletAdapter(),
-    ],
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-    [network]
-  );
+  // const wallets = useMemo(
+  //   () => [
+  //     /**
+  //      * Wallets that implement either of these standards will be available automatically.
+  //      *
+  //      *   - Solana Mobile Stack Mobile Wallet Adapter Protocol
+  //      *     (https://github.com/solana-mobile/mobile-wallet-adapter)
+  //      *   - Solana Wallet Standard
+  //      *     (https://github.com/solana-labs/wallet-standard)
+  //      *
+  //      * If you wish to support a wallet that supports neither of those standards,
+  //      * instantiate its legacy wallet adapter here. Common legacy adapters can be found
+  //      * in the npm package `@solana/wallet-adapter-wallets`.
+  //      */
+  //     new UnsafeBurnerWalletAdapter(),
+  //   ],
+  //   // eslint-disable-next-line react-hooks/exhaustive-deps
+  //   [network]
+  // );
+
+  const oktoConnector = new OktoConnector({
+    chains:[mainnet],
+    options: {
+      projectId: "c63e42ee270545b423495ea9f1a230e6",
+    },
+  });
+
+ 
+const config = createConfig({
+  autoConnect: true,
+  publicClient: createPublicClient({
+    chain: mainnet,
+    transport: http()
+  }),
+  connectors:[ oktoConnector]
+})
 
   const showHeader =
     router.pathname === "/" || router.pathname === "/home" ? true : false;
   return (
-    <ConnectionProvider endpoint={endpoint}>
-      <WalletProvider wallets={wallets} autoConnect>
-        <WalletModalProvider>
+    <WagmiConfig config={config}>
+    <WalletProvider>
           <WorkflowDataProvider>
             <ChakraProvider>
         
@@ -61,8 +75,7 @@ export default function App({ Component, pageProps }: AppProps) {
               <Component {...pageProps} />
             </ChakraProvider>
           </WorkflowDataProvider>
-        </WalletModalProvider>
-      </WalletProvider>
-    </ConnectionProvider>
+          </WalletProvider>
+          </WagmiConfig>
   );
 }

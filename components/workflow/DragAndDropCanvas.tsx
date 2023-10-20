@@ -13,6 +13,7 @@ import { ImCross, ImOpt } from "react-icons/im";
 import { Connection } from "@/public/types/Workflow";
 import { AiOutlineCopy } from "react-icons/ai";
 import { StatusColor, StatusKeys } from "@/lib/constants";
+import ReactTyped from "react-typed";
 
 const ICON_SIZE = 50;
 const ICON_GAP = 50;
@@ -36,7 +37,12 @@ function ActionTooltip({ action }: ActionTooltipProps) {
       </div>
       <div className="whitespace-nowrap flex items-center">
         <strong className="text-blue-400">Action Id:</strong> {action.actionId}
-        <AiOutlineCopy onClick={() => {navigator.clipboard.writeText(action.actionId|| "")}} className="ml-2" />
+        <AiOutlineCopy
+          onClick={() => {
+            navigator.clipboard.writeText(action.actionId || "");
+          }}
+          className="ml-2"
+        />
       </div>
     </div>
   );
@@ -147,6 +153,18 @@ const DragAndDropCanvas: React.FC<DragAndDropCanvasProps> = ({
   return (
     <div className="relative bg-white h-screen flex-1">
       <Xwrapper>
+        {!workflowActions.length && (
+          <div className="text-center my-auto mt-[20%] text-3xl font-extrabold text-indigo-900">
+           <ReactTyped
+          strings={["Start the workflow by clicking on the menu"]}
+          typeSpeed={100}
+          loop
+          backSpeed={20}
+          cursorChar=">"
+          showCursor={true}
+        />
+          </div>
+        )}
         {workflowActions?.map((action, index) => (
           <Draggable
             onDrag={updateXarrow}

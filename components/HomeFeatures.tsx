@@ -26,11 +26,11 @@ const featuresData = [
     title: "Create Trigger",
     imageSrc: "/hero.png",
     description: "",
-    link: "/create-workflow",
+    link: "/installedApps",
     width: 200,
     height: 200,
     backgroundColor: "bg-yellow-400",
-    status:'Coming soon'
+
   },
   {
     title: "Create Action",
@@ -63,11 +63,15 @@ function HomeFeatures() {
       {featuresData.map((feature, index) => (
         <div
           key={index}
-          className={`p-6  animate__animated ${((index%2===0)?"animate__backInLeft":"animate__backInRight")}`}
+          className={`p-6 
+           animate__animated ${((index%2===0)?"animate__backInLeft":"animate__backInRight")}`}
           style={{ flexBasis: "50%" }} 
         >
           <div
-            className={`py-10 bg-cover  bg-center flex flex-col gap-4 ${feature.backgroundColor} items-center justify-center`}
+            className={`py-10 
+            h-[18rem]
+            rounded-xl border-[1px] border-indigo-200 shadow-xl 
+            bg-cover  bg-center flex flex-col gap-4 ${feature.backgroundColor} items-center justify-center`}
             style={{ minHeight: "200px", minWidth: "200px" }} 
           >
             <Image

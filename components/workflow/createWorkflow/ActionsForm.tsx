@@ -34,10 +34,10 @@ const ActionsForm: React.FC<ActionsFormProps> = ({
   })()
   return (
     <div
-      className={`fixed top-0 left-0 w-full h-full flex items-center justify-center  `}
+      className={`fixed top-0 left-0 w-full h-full flex items-center justify-center backdrop-blur-[2px] bg-white/30 `}
     >
-      <div className=" flex flex-col gap-6 bg-indigo-900 p-8  px-16 w-[25%] rounded shadow-lg relative">
-        <span className="text-center font-bold text-3xl tracking-wide text-white ">
+      <div className=" flex flex-col gap-6 bg-indigo-900 p-8  px-16 w-[25%]  rounded-xl border-[1px] border-indigo-200 shadow-xl  relative">
+        <span className="text-center font-bold text-3xl tracking-wide text-white whitespace-nowrap ">
           Select an Action
         </span>
         <span
@@ -52,13 +52,13 @@ const ActionsForm: React.FC<ActionsFormProps> = ({
             className=" relative p-4 bg-blue-200/40 rounded-md text-center  text-black font-semibold  text-lg tracking-wide cursor-pointer"
             onClick={() => setShowDropdown(!showDropdown)}
           >
-            <span className="text-center"> {selectedInstalledApp.walletAddress || 'Select User Account Data'}</span>
+            <span className="text-center "> {selectedInstalledApp.walletAddress || 'Select User Account Data'}</span>
             <MdOutlineKeyboardArrowDown
               size={24}
               className="absolute right-2 top-5"
             />
             {showDropdown && (
-              <div className="flex self-center w-full flex-col absolute top-2 right-0 z-10 bg-indigo-100 rounded-md w-full  p-4">
+              <div className="flex self-center  flex-col absolute top-2 right-0 z-10 bg-indigo-100 rounded-md w-full  p-4">
                 <Dropdown values={values} />
               </div>
             )}

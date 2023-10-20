@@ -10,7 +10,8 @@ import ActionsForm from "./ActionsForm";
 import { client } from "@/lib/gql-client";
 import { ObjectId } from "bson";
 import Image from "next/image";
-import { useConnection, useWallet } from "@solana/wallet-adapter-react";
+import {useWallet} from '@suiet/wallet-kit';
+
 import {
   CreateWorkflowQuery,
   findfunctionsByApplicationId,
@@ -19,7 +20,6 @@ import { Connection, CreateWorkflowInput } from "@/public/types/Workflow";
 import { Spinner } from "@/components/reusables/Spinner";
 import Link from "next/link";
 import selectedAction from "@/public/types/selectedAction";
-import { WalletMultiButton } from "@solana/wallet-adapter-react-ui";
 import { Toast, ToastType } from "@/components/reusables/Toast";
 import { JobSection } from "./JobSection";
 
@@ -53,8 +53,7 @@ export default function CreateWorkflow() {
     setSelectedUserWorkflowJob,
   } = useContext(WorkflowDataContext);
 
-  const { connection } = useConnection();
-  const { publicKey, sendTransaction } = useWallet();
+
   const [toastData, setToastData] = useState<ToastType>({
     message: "",
     type: "error",
@@ -64,6 +63,14 @@ export default function CreateWorkflow() {
   // useEffect(() => {
   //   setMounted(true);
   // }, []);
+  const wallet = useWallet()
+
+  // useEffect(() => {
+  //   if (!wallet.connected) return;
+  //   alert(`connected wallet name: , ${wallet.name}`)
+  //   alert(`account address: ', ${wallet.account?.address}`)
+  //   alert(`account publicKey: , ${wallet.account?.publicKey}`)
+  // }, [wallet.connected])
 
   useEffect(() => {
     console.log("use effetc", selectedUserWorkflow);
@@ -164,7 +171,7 @@ export default function CreateWorkflow() {
         id: `${action1Id + action2Id}`, // You can generate a unique ID
         startIconId: action1Id,
         endIconId: action2Id,
-        
+
       };
 
       setConnections((prevConnections) => [...prevConnections, newConnection]);
