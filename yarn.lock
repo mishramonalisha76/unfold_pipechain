@@ -2265,9 +2265,9 @@
     wagmi "^1.4.1"
 
 "@okto_wallet/okto-wallet-sdk-ui@^1.0.0":
-  version "0.2.0-alpha.0"
-  resolved "https://registry.yarnpkg.com/@okto_wallet/okto-wallet-sdk-ui/-/okto-wallet-sdk-ui-0.2.0-alpha.0.tgz#18c5da1ea3f109b4f62a1efa57003f864caec22f"
-  integrity sha512-o6QwN0hmZjEi3IEQIiJdx9Z9VHF3iq1+RgAlM3vuR9uQGwU0VX29iy18dRKOeWpkgi6H8+ZzbzpB6vXyTMZHaw==
+  version "1.0.0"
+  resolved "https://registry.yarnpkg.com/@okto_wallet/okto-wallet-sdk-ui/-/okto-wallet-sdk-ui-1.0.0.tgz#d0432626b1b409dfdbe41fd5eada85874deb9532"
+  integrity sha512-A4VONHEIzllVxUymrkcdGdnwxaPjhhFHfZ/10D0rDIvomWx80U/Gpk7MKwK/+Y90S2z5UZ+WVh7+zSUd8Jn3Cg==
   dependencies:
     lit "^2.7.6"
     qr-code-styling "^1.6.0-rc.1"

@@ -15,7 +15,7 @@ const ActionsForm: React.FC<ActionsFormProps> = ({
   onClose,
 }) => {
   const [showDropdown, setShowDropdown] = useState<boolean>(false);
-  const [selectedInstalledApp,setSelectedInstalledApp] = useState<{ id: string, walletAddress: string }>({ id: '', walletAddress: '' });
+  const [selectedInstalledApp,setSelectedInstalledApp] = useState<{ id: string, name: string }>({ id: '', name: '' });
   // const values: ValueType[] = [
   //   { label: "mishrmonalisha", value: "mishrmonalisha", function:()=>setSelectedId("mishrmonalisha") },
   //   { label: "mishrmonalisha76", value: "mishrmonalisha76",function:()=>setSelectedId("mishrmonalisha76") },
@@ -24,9 +24,9 @@ const ActionsForm: React.FC<ActionsFormProps> = ({
     if (actions.length)
       return actions[0].installedApp.map((a) => {
         return {
-          label: a?.user?.walletAddress,
-          value: a?.user?.walletAddress,
-          function: () => setSelectedInstalledApp({id:a.id,walletAddress:a?.user?.walletAddress})
+          label: a?.name,
+          value: a?.name,
+          function: () => setSelectedInstalledApp({id:a.id,name:a?.name})
         }
       })
     else
