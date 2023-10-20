@@ -1,4 +1,4 @@
-import React, { useContext, useEffect, useState } from "react";
+import React, { useContext, useEffect, useRef, useState } from "react";
 //import {Form} from '@ginkgo-bioworks/react-json-schema-form-builder';
 import validator from "@rjsf/validator-ajv8";
 import { RJSFSchema, UiSchema } from "@rjsf/utils";
@@ -11,6 +11,7 @@ import { MdOutlineKeyboardArrowDown } from "react-icons/md";
 import { WorkflowDataContext } from "@/context";
 import { RiDraggable } from "react-icons/ri";
 import Draggable from "react-draggable";
+import { useClickAway } from "@/hooks/useClickAway";
 const Form = withTheme(ChakraUITheme);
 
 interface TriggerFormProps {
@@ -31,9 +32,12 @@ const TriggerForm: React.FC<TriggerFormProps> = ({
   console.log("trigger form", workflowActions);
   const [formData, setFormData] = React.useState(null);
   const schema: RJSFSchema = selectedAction?.inputSchema?.schema;
-
+ const dropdownRef = useRef(null);
   const uiSchema: UiSchema = selectedAction?.inputSchema?.uiSchema;
 
+  useClickAway(dropdownRef, () => {
+    setSelectedActionId('');
+  });
   const handleCancel = () => {
     onClose(); // Call the onClose function to close the form
   };
@@ -49,13 +53,15 @@ const TriggerForm: React.FC<TriggerFormProps> = ({
       }`}
     >
       <div className=" flex flex-col gap-2 relative w-[80%] h-[75%] mt-20 rounded-lg p-6 shadow-xl bg-indigo-300 items-start">
-        {workflowActions?.map((action) => (
+        {workflowActions?.map((action,index) => (
           <div
+          key={index}
             className="flex gap-3 items-center 
           rounded-xl shadow-lg
           relative
            justify-start pl-2 bg-indigo-900 p-2"
-            onClick={() => setSelectedActionId(action?.actionId!)}
+           ref={dropdownRef}
+           onClick={() => setSelectedActionId(action?.actionId!)}
           >
             <Image
               src={action?.app?.meta?.src}
@@ -68,11 +74,12 @@ const TriggerForm: React.FC<TriggerFormProps> = ({
             <span className=" text-xl font-bold tracking-wide text-white  cursor-pointer ">
               {action?.app?.name}
             </span>
-            <MdOutlineKeyboardArrowDown size={30} color="#fff" className="" />
+            <MdOutlineKeyboardArrowDown size={30} color="#fff" className=""            
+ />
             {selectedActionId === action?.actionId && (
-              <div className="flex self-center gap-1 shadow-xl flex-col whitespace-nowrap absolute top-[3.2rem] left-0  z-10 bg-indigo-100 rounded-md w-fit pr-4  pl-4 py-2">
-                <div className="whitespace-nowrap font-bold flex items-center">
-                  <strong className="text-indigo-900 text-lg">
+              <div className="flex self-center gap-1 shadow-xl flex-col overflow-y-auto h-[25rem] max-h-[25rem] absolute top-[3.2rem] left-0  z-10 bg-indigo-100 rounded-md w-fit pr-4  pl-4 py-2">
+                <div className=" font-bold flex items-center">
+                  <strong className="text-indigo-900 text-lg whitespace-nowrap">
                     Action Id:
                   </strong>{" "}
                   {action?.actionId}
@@ -85,7 +92,7 @@ const TriggerForm: React.FC<TriggerFormProps> = ({
                 </div>
                 {!!Object.keys(action?.formData || {}).length
                   ? Object.keys(action?.formData || {}).map((key) => (
-                      <div className="whitespace-nowrap font-bold text-lg flex items-center">
+                      <div key={key} className=" font-bold text-lg flex  items-center">
                         <strong className="text-indigo-900">{key}:</strong>{" "}
                         {action?.formData[key]}
                         <AiOutlineCopy
