@@ -36,7 +36,7 @@ const ActionsForm: React.FC<ActionsFormProps> = ({
     <div
       className={`fixed top-0 left-0 w-full h-full flex items-center justify-center backdrop-blur-[2px] bg-white/30 `}
     >
-      <div className=" flex flex-col gap-6 bg-indigo-900 p-8  px-16 w-[25%]  rounded-xl border-[1px] border-indigo-200 shadow-xl  relative">
+      <div className=" flex flex-col gap-6 bg-indigo-900 p-8  px-16 w-fit  rounded-xl border-[1px] border-indigo-200 shadow-xl  relative">
         <span className="text-center font-bold text-3xl tracking-wide text-white whitespace-nowrap ">
           Select an Action
         </span>
@@ -49,16 +49,16 @@ const ActionsForm: React.FC<ActionsFormProps> = ({
 
         <div className="flex gap-4 flex-col ">
           <div
-            className=" relative p-4 bg-blue-200/40 rounded-md text-center  text-black font-semibold  text-lg tracking-wide cursor-pointer"
+            className=" relative p-4 border-[1px] border-white rounded-md text-center whitespace-nowrap w-[19rem] text-white font-semibold  text-lg tracking-wide cursor-pointer"
             onClick={() => setShowDropdown(!showDropdown)}
           >
-            <span className="text-center "> {selectedInstalledApp.walletAddress || 'Select User Account Data'}</span>
+            <span className="text-center "> {selectedInstalledApp.name || 'Select User Account Data'}</span>
             <MdOutlineKeyboardArrowDown
               size={24}
               className="absolute right-2 top-5"
             />
             {showDropdown && (
-              <div className="flex self-center  flex-col absolute top-2 right-0 z-10 bg-indigo-100 rounded-md w-full  p-4">
+              <div className="flex self-center w-fit whitespace-nowrap flex-col absolute top-10 right-0 z-10 bg-indigo-100 rounded-md   p-4">
                 <Dropdown values={values} />
               </div>
             )}
@@ -66,7 +66,7 @@ const ActionsForm: React.FC<ActionsFormProps> = ({
           {actions.map((action, i) => (
             <div
               key={i}
-              className=" p-4 bg-blue-200/40 rounded-md text-center  text-black font-semibold  text-lg tracking-wide cursor-pointer"
+              className=" p-4 border-[1px] border-white rounded-md text-center whitespace-nowrap w-fit text-white font-semibold  text-lg tracking-wide cursor-pointer"
               onClick={() => onActionClick(action,selectedInstalledApp.id)}
             >
               {action.name}

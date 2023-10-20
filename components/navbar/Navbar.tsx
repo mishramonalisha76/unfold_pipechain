@@ -52,7 +52,7 @@ function Navbar() {
               className="absolute right-1 top-2"
             />
             {showDropdown && (
-              <div className="flex self-center  flex-col whitespace-nowrap absolute top-10 -right-2 z-10 bg-indigo-100 rounded-md w-fit pr-4  pl-4 py-2">
+              <div className="flex self-center shadow-lg flex-col whitespace-nowrap absolute top-10 -right-2 z-10 bg-indigo-100 rounded-md w-fit pr-4  pl-4 py-2">
                 <ConnectButton
                
                   style={{

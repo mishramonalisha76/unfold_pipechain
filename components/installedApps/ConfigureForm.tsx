@@ -45,7 +45,7 @@ const ConfigureForm: React.FC<ConfigureFormProps> = ({ onClose }) => {
     <div
       className={`fixed top-0 left-0 w-full flex items-center justify-center backdrop-blur-[2px] bg-white/30  h-full self-center `}
     >
-      <div className=" flex flex-col gap-6 bg-indigo-900 p-8  px-16 w-[25%] rounded-xl border-[1px] border-indigo-200 shadow-xl  relative h-[80%] overflow-y-auto">
+      <div className=" flex flex-col gap-6 h-fit bg-indigo-900 p-8  px-16 w-[25%] rounded-xl border-[1px] border-indigo-200 shadow-xl  relative max-h-[80%] overflow-y-auto">
         <span className="text-center font-bold text-3xl tracking-wide text-white whitespace-nowrap ">
           Add Details
         </span>
@@ -79,7 +79,7 @@ const ConfigureForm: React.FC<ConfigureFormProps> = ({ onClose }) => {
             </p>
             <div className="flex flex-col gap-4">
               {inputKeyFields.map((data, i) => (
-                <div className="flex gap-2 ">
+                <div className="flex gap-2 " key={`key${i}`}>
                   <input
                     className="w-full rounded-md text-black bg-slate-200 p-2"
                     placeholder="key"
