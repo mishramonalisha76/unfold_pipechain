@@ -15,7 +15,7 @@ function Contact() {
         </p>
         <Link
           href="/"
-          className="mt-4 rounded-2xl bg-gradient-to-r from-orange-500 to-yellow-400 px-20 py-3 text-lg font-normal  text-white text-transparent "
+          className="mt-4 rounded-2xl bg-gradient-to-r shadow-xl   from-orange-500 to-yellow-400 px-20 py-3 text-lg font-normal  text-white text-transparent "
         >
           Learn more
         </Link>
@@ -23,7 +23,7 @@ function Contact() {
       </div>
       <div
         className="flex flex-col  bg-indigo-300  gap-4  p-14 flex-1 -ml-[10%] transform 
-                                transition duration-500 hover:scale-110"
+                         shadow-xl       transition duration-500 hover:scale-110"
       >
         <input
           type="text"
@@ -40,7 +40,7 @@ function Contact() {
           placeholder="Enter your message"
           className="p-2 px-4 rounded-lg"
         />
-        <button className="rounded-2xl bg-gradient-to-r from-indigo-800 to-indigo-500 px-6 py-2 text-lg font-bold  text-white text-transparent ">
+        <button className="rounded-2xl  bg-gradient-to-r from-indigo-800 to-indigo-500 px-6 py-2 text-lg font-bold  text-white text-transparent ">
           Submit
         </button>
       </div>

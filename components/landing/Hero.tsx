@@ -17,7 +17,7 @@ function Hero() {
         <Link href={"/home"}>
           <button
             className="text-white my-4 flex items-center text-xl font-bold py-4 rounded-3xl px-28 bg-indigo-400 transform 
-                                transition duration-500 hover:scale-110 cursor-pointer"
+                     shadow-xl           transition duration-500 hover:scale-110 cursor-pointer"
           >
             Launch App
             <Image width={30} height={30}
