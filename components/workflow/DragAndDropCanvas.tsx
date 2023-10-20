@@ -24,10 +24,12 @@ type ActionTooltipProps = {
 
 function ActionTooltip({ action }: ActionTooltipProps) {
   return (
-    <div className="flex flex-col  p-4 bg-indigo-900 gap-2 text-white  
+    <div
+      className="flex flex-col  p-4 bg-indigo-900 gap-2 text-white  
    
     border-[2px] border-indigo-200
-     rounded-lg shadow-xl">
+     rounded-lg shadow-xl"
+    >
       <div className="whitespace-nowrap">
         <strong className="text-blue-400  ">App Name:</strong>{" "}
         {action?.app?.name}
@@ -70,8 +72,6 @@ const DragAndDropCanvas: React.FC<DragAndDropCanvasProps> = ({
   const [contextMenuAction, setContextMenuAction] =
     useState<selectedAction | null>(null);
   const contextMenuRef = useRef(null);
-
-
 
   useClickAway(contextMenuRef, () => {
     setContextMenuAction(null);
@@ -125,7 +125,7 @@ const DragAndDropCanvas: React.FC<DragAndDropCanvasProps> = ({
     // }
 
     // Remove the last connection from the connections state
- 
+
     let updatedConnections = [...connections];
     if (updatedConnections.length === 1 && i == 0) updatedConnections = [];
     else if (updatedConnections.length > 1) updatedConnections.splice(i, 1);
@@ -154,14 +154,14 @@ const DragAndDropCanvas: React.FC<DragAndDropCanvasProps> = ({
       <Xwrapper>
         {!workflowActions.length && (
           <div className="text-center my-auto mt-[20%] text-3xl font-extrabold text-indigo-900">
-           <ReactTyped
-          strings={["Start the workflow by clicking on the menu"]}
-          typeSpeed={100}
-          loop
-          backSpeed={20}
-          cursorChar=">"
-          showCursor={true}
-        />
+            <ReactTyped
+              strings={["Start the workflow by clicking on the menu"]}
+              typeSpeed={100}
+              loop
+              backSpeed={20}
+              cursorChar=">"
+              showCursor={true}
+            />
           </div>
         )}
         {workflowActions?.map((action, index) => (
@@ -178,7 +178,7 @@ const DragAndDropCanvas: React.FC<DragAndDropCanvasProps> = ({
             <div
               id={action.actionId}
               ref={contextMenuRef}
-              className={`cursor-pointer relative flex w-fit    ${getActionStatusBorder(
+              className={`cursor-pointer relative flex w-fit group   ${getActionStatusBorder(
                 action
               )} p-1 ${
                 lastClickedActionId === action.actionId ? "selected-icon" : ""
@@ -204,8 +204,21 @@ const DragAndDropCanvas: React.FC<DragAndDropCanvasProps> = ({
                 data-for="actionTooltip"
                 data-tip="Details"
               />
-              <div className={`absolute bottom-16 left-0  `}>
+              <InfoContainer>
                 <ActionTooltip action={action} />
+              </InfoContainer>
+              <div className="absolute bottom-16">
+                <div
+                  className="flex flex-col  p-4 bg-indigo-900 gap-2 text-white  
+   
+           border-[2px] border-indigo-200
+            rounded-lg shadow-xl"
+                >
+                  <div className="whitespace-nowrap">
+                    <strong className="text-blue-400  ">App Name:</strong>{" "}
+                    {action?.app?.name}
+                  </div>
+                </div>
               </div>
             </div>
           </Draggable>
