@@ -165,11 +165,11 @@ export default function CreateWorkflow() {
         id: `${action1Id + action2Id}`, // You can generate a unique ID
         startIconId: action1Id,
         endIconId: action2Id,
-        order:(childOrder.get(action2Id) || 0 )
+        order:(childOrder.get(action1Id) || 0 )
 
       };
       const newChildOrder = childOrder;
-       childOrder.set(action2Id,(newChildOrder.get(action2Id) || 0)+1);
+       childOrder.set(action1Id,(newChildOrder.get(action1Id) || 0)+1);
        setChildOrder(newChildOrder);
        
       setConnections((prevConnections) => [...prevConnections, newConnection]);
@@ -179,7 +179,8 @@ export default function CreateWorkflow() {
       alert("Cannot make the connection!!");
     }
   };
-
+console.log(connections)
+console.log(childOrder)
 
   const dragActionClick = (action: Action) => {
     const actionId = action.actionId!;

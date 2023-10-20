@@ -24,6 +24,9 @@ export const GetWorkflow = () => {
         console.log('ERROR FROM GRAPHQL-REQUEST API CALL', err);
         setLoading(false);
       }
+      finally{
+         setLoading(false);
+      }
     })();
   }, []);
 
