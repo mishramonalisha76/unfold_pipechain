@@ -5,6 +5,8 @@ import { Spinner } from "../reusables";
 import { FcAddRow } from "react-icons/fc";
 import { useContext, useEffect, useState } from "react";
 import ConfigureForm from "./ConfigureForm";
+import { client } from "@/lib/gql-client";
+import { findAllApplicationQuery } from "@/lib/gql-queries";
 
 const InstalledApps = () => {
   const { userWorkflows, setSelectedUserWorkflow, setUserWorkflows } =
@@ -12,8 +14,23 @@ const InstalledApps = () => {
   const [loading, setLoading] = useState(false);
   const [isConfigureFormOpen, setIsConfigureFormOpen] = useState(false);
 
- 
+  useEffect(()=>{
+    const getAllApplicationInstalledApp = async () => {
+      try {
+        const response:any = await client.request(findAllApplicationQuery);
+        console.log('RESPONSE FROM GRAPHQL-REQUEST API CALL', response.appFindAll);
+        // Update state with the response data as needed
+        // For example, setApplications(response.appFindAll)
+      } catch (err) {
+        console.log('ERROR FROM GRAPHQL-REQUEST API CALL', err);
+      }
+    };
 
+    // Call the API function
+    getAllApplicationInstalledApp();
+  },[])
+
+  
   return (
     <div className=" flex flex-col">
       <div className="flex gap-4 items-center  w-screen px-8 py-4  bg-white border-b-4  border-b-indigo-300">

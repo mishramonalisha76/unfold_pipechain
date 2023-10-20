@@ -7,6 +7,11 @@ export const findAllApplicationQuery = gql`
       name
       description
       meta
+      InstalledApp {
+        id
+        name
+        inputValues
+      }
     }
   }`;
 
@@ -26,9 +31,7 @@ export const findfunctionsByApplicationId = gql`
       }
       installedApp{
         id
-        user {
-          walletAddress
-        }
+        name
       }
     
     }
@@ -42,6 +45,11 @@ mutation createWorkflow($createWorkflowInput: CreateWorkflowInput!) {
   }
 }
 `
+
+export const createInstalledApp = gql`
+mutation createInstalledApp($createInstalledAppInput: createInstalledAppInput) {
+  createInstalledApp(createInstalledAppInput: $createInstalledAppInput)
+}`
 
 export const getWorkflowQuery = gql`
 query getAllWorkflow{
