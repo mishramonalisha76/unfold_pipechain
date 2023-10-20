@@ -4,8 +4,12 @@ import validator from "@rjsf/validator-ajv8";
 import { RJSFSchema, UiSchema } from "@rjsf/utils";
 import { withTheme } from "@rjsf/core";
 import { CloseIcon } from "@chakra-ui/icons";
+import Image from "next/image";
+import { AiOutlineCopy } from "react-icons/ai";
 import { Theme as ChakraUITheme } from "@rjsf/chakra-ui";
+import { MdOutlineKeyboardArrowDown } from "react-icons/md";
 import { WorkflowDataContext } from "@/context";
+import { RiDraggable } from "react-icons/ri";
 import Draggable from "react-draggable";
 const Form = withTheme(ChakraUITheme);
 
@@ -20,7 +24,11 @@ const TriggerForm: React.FC<TriggerFormProps> = ({
   onClose,
   onSubmit,
 }) => {
-  const { selectedAction, setSelectedAction } = useContext(WorkflowDataContext);
+  const { selectedAction, setSelectedAction, workflowActions } =
+    useContext(WorkflowDataContext);
+  const [selectedActionId, setSelectedActionId] = useState<string>("");
+
+  console.log("trigger form", workflowActions);
   const [formData, setFormData] = React.useState(null);
   const schema: RJSFSchema = selectedAction?.inputSchema?.schema;
 
@@ -40,26 +48,81 @@ const TriggerForm: React.FC<TriggerFormProps> = ({
         isOpen ? "" : "hidden"
       }`}
     >
-      <div  className=" flex relative w-[80%] h-[75%] mt-20 rounded-lg p-6 shadow-xl bg-indigo-300">
-        details
-        <Draggable axis="x" bounds='parent'>
-          <div className="bg-indigo-900  w-[30%] p-12 h-[43rem] mt-20 overflow-y-auto flex flex-col rounded-xl border-[1px] border-indigo-200 shadow-xl   text-white absolute -bottom-6 left-1/3">
-            <span
-              className="text-white  font-bold absolute right-4 top-4 cursor-pointer"
-              onClick={() => onClose()}
-            >
-              X
-            </span>
-
-            <Form
-              schema={schema}
-              uiSchema={uiSchema}
-              validator={validator}
-              onSubmit={(submissionData: any) => {
-                handleSubmit(submissionData.formData);
-              }}
+      <div className=" flex flex-col gap-2 relative w-[80%] h-[75%] mt-20 rounded-lg p-6 shadow-xl bg-indigo-300 items-start">
+        {workflowActions?.map((action) => (
+          <div
+            className="flex gap-3 items-center 
+          rounded-xl shadow-lg
+          relative
+           justify-start pl-2 bg-indigo-900 p-2"
+            onClick={() => setSelectedActionId(action?.actionId!)}
+          >
+            <Image
+              src={action?.app?.meta?.src}
+              alt="logo"
+              width={27}
+              height={27}
+              className="rounded-full"
+              objectFit="contain"
             />
+            <span className=" text-xl font-bold tracking-wide text-white  cursor-pointer ">
+              {action?.app?.name}
+            </span>
+            <MdOutlineKeyboardArrowDown size={30} color="#fff" className="" />
+            {selectedActionId === action?.actionId && (
+              <div className="flex self-center gap-1 shadow-xl flex-col whitespace-nowrap absolute top-[3.2rem] left-0  z-10 bg-indigo-100 rounded-md w-fit pr-4  pl-4 py-2">
+                <div className="whitespace-nowrap font-bold flex items-center">
+                  <strong className="text-indigo-900 text-lg">
+                    Action Id:
+                  </strong>{" "}
+                  {action?.actionId}
+                  <AiOutlineCopy
+                    onClick={() => {
+                      navigator.clipboard.writeText(action?.actionId || "");
+                    }}
+                    className="ml-2 cursor-pointer "
+                  />
+                </div>
+                {!!Object.keys(action?.formData || {}).length
+                  ? Object.keys(action?.formData || {}).map((key) => (
+                      <div className="whitespace-nowrap font-bold text-lg flex items-center">
+                        <strong className="text-indigo-900">{key}:</strong>{" "}
+                        {action?.formData[key]}
+                        <AiOutlineCopy
+                          onClick={() => {
+                            navigator.clipboard.writeText(
+                              `{{ $json["${action?.formData[key]}"] }}` || ""
+                            );
+                          }}
+                          className="ml-2 cursor-pointer"
+                        />
+                      </div>
+                    ))
+                  : null}
+              </div>
+            )}
           </div>
+        ))}
+        <Draggable axis="x" bounds="parent">
+        
+            <div className="bg-indigo-900   w-[30%] p-12 h-[43rem] mt-20 overflow-y-auto flex flex-col rounded-xl border-[1px] border-indigo-200 shadow-xl   text-white absolute -bottom-6 left-1/3">
+              <span
+                className="text-white  font-bold absolute right-4 top-4 cursor-pointer"
+                onClick={() => onClose()}
+              >
+                X
+              </span>
+
+              <Form
+                schema={schema}
+                uiSchema={uiSchema}
+                validator={validator}
+                onSubmit={(submissionData: any) => {
+                  handleSubmit(submissionData.formData);
+                }}
+              />
+            </div>
+         
         </Draggable>
       </div>
     </div>

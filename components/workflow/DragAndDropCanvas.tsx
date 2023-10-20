@@ -24,7 +24,10 @@ type ActionTooltipProps = {
 
 function ActionTooltip({ action }: ActionTooltipProps) {
   return (
-    <div className="flex flex-col  p-4 bg-indigo-900 gap-2 text-white   rounded">
+    <div className="flex flex-col  p-4 bg-indigo-900 gap-2 text-white  
+   
+    border-[2px] border-indigo-200
+     rounded-lg shadow-xl">
       <div className="whitespace-nowrap">
         <strong className="text-blue-400  ">App Name:</strong>{" "}
         {action?.app?.name}
@@ -172,14 +175,14 @@ const DragAndDropCanvas: React.FC<DragAndDropCanvasProps> = ({
             key={action.actionId}
             // onStop={handleDrop(action)}
             defaultPosition={{
-              x: index * (ICON_SIZE + ICON_GAP) + 100,
+              x: index * (ICON_SIZE + ICON_GAP) + 500,
               y: 100,
             }}
           >
             <div
               id={action.actionId}
               ref={contextMenuRef}
-              className={`cursor-pointer relative flex w-fit group   ${getActionStatusBorder(
+              className={`cursor-pointer relative flex w-fit    ${getActionStatusBorder(
                 action
               )} p-1 ${
                 lastClickedActionId === action.actionId ? "selected-icon" : ""
@@ -206,9 +209,9 @@ const DragAndDropCanvas: React.FC<DragAndDropCanvasProps> = ({
                 data-for="actionTooltip"
                 data-tip="Details"
               />
-              <InfoContainer>
+              <div className={`absolute bottom-16 left-0  `}>
                 <ActionTooltip action={action} />
-              </InfoContainer>
+              </div>
             </div>
           </Draggable>
         ))}

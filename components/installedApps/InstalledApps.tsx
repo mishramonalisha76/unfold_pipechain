@@ -19,7 +19,7 @@ function Tooltip({ installedApp }: any) {
           onClick={() => {
             navigator.clipboard.writeText(installedApp?.id || "");
           }}
-          className="ml-2"
+          className="ml-2 cursor-pointer"
         />
       </div>
       <div className="whitespace-nowrap">

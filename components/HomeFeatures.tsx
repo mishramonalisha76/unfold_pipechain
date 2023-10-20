@@ -6,10 +6,10 @@ import Link from "next/link";
 const featuresData = [
   {
     title: "Create WorkFlow",
-    imageSrc: "/hero.png",
+    imageSrc: "/create.png",
     description: "",
     link: "/createWorkflow",
-    width: 200,
+    width: 150,
     height: 200,
     backgroundColor: "bg-indigo-900",
   },
@@ -23,7 +23,7 @@ const featuresData = [
     backgroundColor: "bg-indigo-300",
   },
   {
-    title: "Create Trigger",
+    title: "Configure App",
     imageSrc: "/hero.png",
     description: "",
     link: "/installedApps",

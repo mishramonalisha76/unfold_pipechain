@@ -27,6 +27,7 @@ export const findfunctionsByApplicationId = gql`
       outputSchema
       appId
       app {
+        name
         meta
       }
       installedApp{

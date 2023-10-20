@@ -42,7 +42,31 @@ function Navbar() {
         </Link>
         <span className="cursor-pointer">Contact</span>
         <div className="flex gap-3">
-          <div
+          <ConnectButton
+          label='Connect with Sui'
+            style={{
+              // height: "36px",
+              height: "36px",
+              padding: "8px 12px 10px 12px ",
+              borderRadius: "10px",
+              fontSize: "0.875rem",
+              background: "rgb(129 140 248)",
+              //  color:'darkblue',
+              //  textAlign:'start',
+              width: "fit-content",
+              //  padding: " 0.5rem 9px",
+              //  borderRadius: "10px",
+              //  fontSize: "0.875rem",
+              //  background: "transparent",
+            }}
+          />
+          <button
+            onClick={() => connect()}
+            className=" text-white text-sm font-bold p-2 px-4 rounded-lg bg-indigo-400 cursor-pointer"
+          >
+            Connect with okto
+          </button>
+          {/* <div
             className=" relative  bg-indigo-400 rounded-lg w-[10rem]   text-white  text-sm font-bold p-2 px-4 tracking-wide cursor-pointer"
             onClick={() => setShowDropdown(!showDropdown)}
           >
@@ -66,15 +90,10 @@ function Navbar() {
                     background: "transparent",
                   }}
                 />
-                <button
-                  onClick={() => connect()}
-                  className="w-full text-indigo-900 p-2 text-sm font-bold hover:bg-indigo-400/25 rounded-lg cursor-pointer"
-                >
-                  Connect with okto
-                </button>
+                
               </div>
             )}
-          </div>
+          </div> */}
           {/* <ConnectButton
             style={{
               height: "36px",
