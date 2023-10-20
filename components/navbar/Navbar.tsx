@@ -52,12 +52,15 @@ function Navbar() {
               className="absolute right-1 top-2"
             />
             {showDropdown && (
-              <div className="flex self-center  flex-col absolute top-2 gap-4 right-0 z-10 bg-indigo-100 rounded-md w-full  p-4">
+              <div className="flex self-center  flex-col whitespace-nowrap absolute top-10 -right-2 z-10 bg-indigo-100 rounded-md w-fit pr-4  pl-4 py-2">
                 <ConnectButton
+               
                   style={{
-                    height: "36px",
+                    // height: "36px",
+                    color:'darkblue',
+                    textAlign:'start',
                     width: "fit-content",
-                    padding: "8px  15px 12px 15px",
+                    padding: " 0.5rem 9px",
                     borderRadius: "10px",
                     fontSize: "0.875rem",
                     background: "transparent",
@@ -65,7 +68,7 @@ function Navbar() {
                 />
                 <button
                   onClick={() => connect()}
-                  className=" text-white text-sm font-bold p-2 px-4 rounded-lg bg-indigo-400 cursor-pointer"
+                  className="w-full text-indigo-900 p-2 text-sm font-bold hover:bg-indigo-400/25 rounded-lg cursor-pointer"
                 >
                   Connect with okto
                 </button>
