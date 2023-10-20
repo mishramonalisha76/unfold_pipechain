@@ -175,7 +175,6 @@ export default function CreateWorkflow() {
         order:(childOrder.get(action2Id) || 0 )
 
       };
-
       const newChildOrder = childOrder;
        childOrder.set(action2Id,(newChildOrder.get(action2Id) || 0)+1);
        setChildOrder(newChildOrder);
@@ -188,8 +187,7 @@ export default function CreateWorkflow() {
     }
   };
 
-  console.log('order',connections)
-  console.log(childOrder)
+
   const dragActionClick = (action: Action) => {
     const actionId = action.actionId!;
     //iconIdCounter++;

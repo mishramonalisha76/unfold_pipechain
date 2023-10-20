@@ -176,7 +176,7 @@ const DragAndDropCanvas: React.FC<DragAndDropCanvasProps> = ({
             // onStop={handleDrop(action)}
             defaultPosition={{
               x: index * (ICON_SIZE + ICON_GAP) + 500,
-              y: 100,
+              y: 150,
             }}
           >
             <div

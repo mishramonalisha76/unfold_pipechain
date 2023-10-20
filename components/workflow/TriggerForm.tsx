@@ -60,8 +60,8 @@ const TriggerForm: React.FC<TriggerFormProps> = ({
           rounded-xl shadow-lg
           relative
            justify-start pl-2 bg-indigo-900 p-2"
-           ref={dropdownRef}
-           onClick={() => setSelectedActionId(action?.actionId!)}
+        
+           onClick={() => setSelectedActionId(selectedActionId ? '':action?.actionId! )}
           >
             <Image
               src={action?.app?.meta?.src}

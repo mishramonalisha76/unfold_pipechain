@@ -40,7 +40,7 @@ const featuresData = [
     width: 180,
     height: 50,
     backgroundColor: "bg-yellow-400",
-    // status:'Coming soon'
+    status:'Coming soon'
   },
 ];
 
