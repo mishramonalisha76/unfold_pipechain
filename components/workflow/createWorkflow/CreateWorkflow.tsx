@@ -171,7 +171,7 @@ export default function CreateWorkflow() {
       const newChildOrder = childOrder;
        childOrder.set(action1Id,(newChildOrder.get(action1Id) || 0)+1);
        setChildOrder(newChildOrder);
-       
+      
       setConnections((prevConnections) => [...prevConnections, newConnection]);
       
       setLastClickedActionId(null);
@@ -265,6 +265,7 @@ console.log(childOrder)
       return {
         startActionId: c.startIconId,
         endActionId: c.endIconId,
+        order: c.order
       };
     });
     const workflowObject: CreateWorkflowInput = {
@@ -303,6 +304,7 @@ console.log(childOrder)
 
 console.log(selectedAction)
 console.log(selectedApplication)
+console.log("CONNECTIONS",connections);
   return (
     <>
       <div className="flex ">

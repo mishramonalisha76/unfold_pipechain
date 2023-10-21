@@ -49,7 +49,7 @@ const Sidebar: React.FC<SidebarProps> = ({
           >
             <div className="w-10 h-10 overflow-hidden">
               <img
-                className=" w-[100%] h-[100%] object-contain"
+                className=" w-[100%] h-[100%] object-contain rounded-full"
                 src={application.meta.src}
                 alt="Icon"
               />

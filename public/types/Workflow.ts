@@ -12,6 +12,7 @@ export interface Connections {
   }
 
   export interface Connection {
+    order: number;
     startIconId: string;
     endIconId: string;
   }
