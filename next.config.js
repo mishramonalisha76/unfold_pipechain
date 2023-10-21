@@ -3,7 +3,7 @@ const rewrites = () => {
   return [
     {
       source: "/graphql",
-      destination:"http://ec2-34-227-206-18.compute-1.amazonaws.com/graphql"
+      destination:"http://ec2-54-209-186-217.compute-1.amazonaws.com/graphql"
     },
   ];
 };
